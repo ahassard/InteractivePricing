@@ -5,35 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+  <link rel="stylesheet" type="text/css" href="./styles.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script type="text/javscript" src="./ipJavaScript.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <title>Frontend Mentor | Interactive pricing component</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
-
-  Simple, traffic-based pricing
-  Sign-up for our 30-day trial. No credit card required. 
-
-  Pageviews
-  $ /month
-
-  Monthly Billing
-  Yearly Billing 25% discount
-
-  Unlimited websites
-  100% data ownership
-  Email reports
-
-  Start my trial
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+  <div class="container">
+    <div class="row" id="row1">
+  <div class="col-xl">
+    <h1>Simple, traffic-based pricing</h1>
+  <h5>Sign-up for our 30-day trial. No credit card required.</h5> 
   </div>
+  
+    </div>
+    <div class="row" id="row2">
+  <div class="col-xl">
+    <div class="card">
+      <div class="row" id="cardRow1">
+        <div class="col-xl">
+          <div id="SelectValue"></div>
+        </div>
+        <div class="col-xl" style="text-align: right;">
+        <div id="DollarAmount"></div>
+        </div>
+      </div>
+  <div class="row" id="cardRow2">
+    <div class="col-xl">
+      <div class="main">
+        <input type="range" min="0" max="100" value="50" id="slider">
+        <div id="selector">
+          <div class="SelectBtn"></div>
+        </div>
+        <div id="ProgressBar"></div>
+      </div>
+    
+    </div>
+  </div>
+  <div class="row" id="cardRow3">
+    <div class="col-xl-5"><h5 style="float:right;">Monthly Billing</h5></div>
+    <div class="col-xl-2">
+      <label class="switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round"></div>
+      </label>
+    </div>
+    <div class="col-xl-5" style="display: inherit;"> 
+      <h5>Yearly Billing</h5>
+      <span class="badge rounded-pill discountBadge">25% discount</span>
+    </div>
+  </div>
+  <div class="row" id="cardRow4">
+    <div class="col-xl">
+      <ul>
+      <li>Unlimited websites</li>
+      <li>100% data ownership</li>
+      <li>Email reports</li>
+      </ul>
+    </div>
+    <div class="col-xl">
+       <button class="startBtn">Start my trial</button>
+    </div>
+  </div>
+    </div>
+  </div>
+    </div>  
+  </div>
+  <footer>
+    <div class="row align-items-end" id="row3">
+      <div class="col-xl">
+        <div class="attribution">
+          Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+          Coded by <a href="#">Ashley Hassard</a>.
+        </div>
+      </div>
+    </div>
+   
+    <img src="./images/favicon-32x32.png" /><br>
+    <img src="./images/icon-check.svg" /><br>
+    <img src="./images/icon-slider.svg" /><br>
+
+  </footer>
+<script>
+  var slider = document.getElementById("slider");
+  var selector = document.getElementById("selector");
+  var SelectValue = document.getElementById("SelectValue");
+  var ProgressBar = document.getElementById("ProgressBar");
+  var DollarAmount = document.getElementById("DollarAmount");
+  var CheckBox = document.getElementById("checkbox");
+    SelectValue.innerHTML = (50 * 20) +" K PageViews";
+    DollarAmount.innerHTML = "<h3>$" + Math.round(50 * 32) / 100 + "</h3> /month";
+    CheckBox.onchange = function () {
+      if (CheckBox.checked == true)
+      {
+        DollarAmount.innerHTML = "<h3>$" + Math.round(slider.value * 24) / 100 + "</h3> /month";
+      } else { DollarAmount.innerHTML = "<h3>$" + Math.round(slider.value * 32) / 100 + "</h3> /month"; }
+    }
+    slider.oninput = function ()
+    {
+      
+      SelectValue.innerHTML = (this.value * 20) + " K PageViews";
+      selector.style.left = this.value + "%";
+      ProgressBar.style.width = this.value + "%";
+      if (CheckBox.checked == true){
+        DollarAmount.innerHTML = "<h3>$" + Math.round(this.value * 24) / 100 + "</h3> /month";
+      } else {DollarAmount.innerHTML = "<h3>$" + Math.round(this.value * 32)/100 + "</h3> /month"; }
+    }
+
+    
+
+
+</script>
+
 </body>
 </html>
